@@ -1,16 +1,8 @@
 import java.util.Arrays;
 
 public class Solution {
-    public static void main(String[] args) {
-        int[] result = new int[] { 5,2,8,7,23,56,4,3,23,5,6 };
 
-        int[] sort = sort(result);
-        for (int i = 0; i < result.length; i++) {
-            System.out.printf("%d ",sort[i]);
-        }
-    }
-
-    private static int[] sort(int[] result) {
+    public int[] sort(int[] result) {
         if (result.length < 2) {
             return result;
         } else {
@@ -20,31 +12,31 @@ public class Solution {
         }
     }
 
-    private static int[] merge(int[] left, int[] right) {
-        int i = 0, j = 0, k = 0;
+    public int[] merge(int[] left, int[] right) {
+        int counLeft = 0, countRight = 0, resultCount = 0;
         int[] result = new int[left.length + right.length];
-        while (i < left.length && j < right.length) {
-            if (left[i] < right[j]) {
-                result[k] = left[i];
-                i++;
+        while (counLeft < left.length && countRight < right.length) {
+            if (left[counLeft] < right[countRight]) {
+                result[resultCount] = left[counLeft];
+                counLeft++;
             } else {
-                result[k] = right[j];
-                j++;
+                result[resultCount] = right[countRight];
+                countRight++;
             }
-            k++;
+            resultCount++;
         }
-        if (i == left.length) {
-            while (j < right.length) {
-                result[k] = right[j];
-                j++;
-                k++;
+        if (counLeft == left.length) {
+            while (countRight < right.length) {
+                result[resultCount] = right[countRight];
+                countRight++;
+                resultCount++;
             }
         }
-        if (j == right.length) {
-            while (i < left.length) {
-                result[k] = left[i];
-                i++;
-                k++;
+        if (countRight == right.length) {
+            while (counLeft < left.length) {
+                result[resultCount] = left[counLeft];
+                counLeft++;
+                resultCount++;
             }
         }
         return result;
